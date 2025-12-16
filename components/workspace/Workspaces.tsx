@@ -21,6 +21,7 @@ export default function Workpsaces() {
 	const workspaces =  createBinding(hypr, "workspaces").as(ws => [...ws].sort((a,b) => a.id - b.id));
 	const [icons, setIcons] = createState<string[]>([])
 	const [focusedWorkspace, setFocusedWorkspace] = createState<Workspace>(hypr.focusedWorkspace)
+	//좀 안좋은 방법 이거 연쇄 호출 가능성 이씅ㅁ
 	createEffect(() => {
 		setIcons(focusedWorkspace().clients.map((client) => {
 			const cls = client.class;
@@ -30,7 +31,8 @@ export default function Workpsaces() {
 	})
 
     return (
-		<box class="workspaces" orientation={Gtk.Orientation.VERTICAL}>
+		<box class="workspaces" orientation={Gtk.Orientation.VERTICAL}
+		>
 			<For each={workspaces}>
 				{(ws: Workspace) => {
 					const isFocused = createBinding(

@@ -240,41 +240,42 @@ function Clock({ format = "%H:%M" }) {
 
 export default function Bar({ gdkmonitor }: { gdkmonitor: Gdk.Monitor }) {
   let win: Astal.Window
-  const { TOP, LEFT, RIGHT } = Astal.WindowAnchor
+  const { TOP, LEFT, RIGHT, BOTTOM } = Astal.WindowAnchor
 
   onCleanup(() => {
-    // Root components (windows) are not automatically destroyed.
-    // When the monitor is disconnected from the system, this callback
-    // is run from the parent <For> which allows us to destroy the window
     win.destroy()
   })
 
   return (
-    <window
-      $={(self) => (win = self)}
-      visible
-      namespace="my-bar"
-      name={`bar-${gdkmonitor.connector}`}
-      gdkmonitor={gdkmonitor}
-      exclusivity={Astal.Exclusivity.EXCLUSIVE}
-      anchor={RIGHT}
-      application={app}
-    >
-      <centerbox orientation={Gtk.Orientation.VERTICAL}>
-        <box $type="start" orientation={Gtk.Orientation.VERTICAL}>
-          <Clock />
-          <Mpris />
-        </box>
-        <box $type="center">
-          <Workpsaces/>
-        </box>
-        <box $type="end" orientation={Gtk.Orientation.VERTICAL}>
-          <Tray />
-          <Wireless />
-          <AudioOutput />
-          <Battery />
-        </box>
-      </centerbox>
-    </window>
-  )
+		<window
+			$={(self) => (win = self)}
+			visible
+			namespace="my-bar"
+			name={`bar-${gdkmonitor.connector}`}
+			gdkmonitor={gdkmonitor}
+			exclusivity={Astal.Exclusivity.EXCLUSIVE}
+			anchor={RIGHT | TOP | BOTTOM }
+			application={app}
+		>
+			<centerbox orientation={Gtk.Orientation.VERTICAL}>
+				<box $type="start" orientation={Gtk.Orientation.VERTICAL}>
+					<Clock />
+					<Mpris />
+				</box>
+				<box
+					$type="center"
+					halign={Gtk.Align.CENTER}
+					valign={Gtk.Align.CENTER}
+				>
+					<Workpsaces />
+				</box>
+				<box $type="end" orientation={Gtk.Orientation.VERTICAL}>
+					<Tray />
+					<Wireless />
+					<AudioOutput />
+					<Battery />
+				</box>
+			</centerbox>
+		</window>
+  );
 }

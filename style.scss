@@ -1,17 +1,16 @@
+window#screen-border{
 
-
-window {
-    height: max-content;
+    box-shadow: none;
+    background: none;
+    border: none;
 }
 
-
-window dbusmenu { 
-    color: pink;
+window box {
+  background-color: transparent;
 }
 
 .workspaces {
   button {
-    /* GTK4 버튼 기본 스타일 초기화 */
     background: none;
     border: none;
     padding: 4px 8px;
@@ -20,14 +19,16 @@ window dbusmenu {
     background-color: #333;
     color: #fff;
 
-    &:hover {
+    button:hover {
       background-color: #555;
     }
 
-    /* 활성화된 워크스페이스 스타일 */
-    &.focused {
+    button.focused {
       background-color: #007bff;
       color: white;
     }
   }
 }
+
+
+// 1. 윈도우 자체 투명화 (이게 없으면 회색 배경이 덮입니다)

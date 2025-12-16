@@ -2,6 +2,7 @@ import { createBinding, For, This } from "ags"
 import app from "ags/gtk4/app"
 import style from "./style.scss"
 import ElainaBar from './layouts/bar/ElainaBar';
+import WindowBorder from "./layouts/WindowBorder";
 app.start({
   css: style,
   main() {
@@ -11,6 +12,7 @@ app.start({
 			{(monitor) => (
 				<This this={app}>
 					<ElainaBar gdkmonitor={monitor} />
+					<WindowBorder monitor={monitor}/>
 				</This>
 			)}
 		</For>

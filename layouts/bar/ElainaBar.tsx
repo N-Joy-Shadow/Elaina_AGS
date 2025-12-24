@@ -14,6 +14,7 @@ import { For, With, createBinding, onCleanup } from "ags"
 import { createPoll } from "ags/time"
 import { execAsync } from "ags/process"
 import Workpsaces from "../../components/workspace/Workspaces"
+import LeftItems from "./Left"
 
 function Mpris() {
   const mpris = AstalMpris.get_default()
@@ -174,7 +175,6 @@ function Wireless() {
 
 function AudioOutput() {
   const { defaultSpeaker: speaker } = AstalWp.get_default()!
-
   return (
     <menubutton>
       <image iconName={createBinding(speaker, "volumeIcon")} />
@@ -248,7 +248,9 @@ export default function Bar({ gdkmonitor }: { gdkmonitor: Gdk.Monitor }) {
 
   return (
 		<window
-			$={(self) => (win = self)}
+			$={(self) => {
+        win = self
+      }}
 			visible
 			namespace="my-bar"
 			name={`bar-${gdkmonitor.connector}`}
@@ -256,19 +258,11 @@ export default function Bar({ gdkmonitor }: { gdkmonitor: Gdk.Monitor }) {
 			exclusivity={Astal.Exclusivity.EXCLUSIVE}
 			anchor={RIGHT | TOP | BOTTOM }
 			application={app}
+      widthRequest={54}
+      class="elaina-bar"
 		>
-			<centerbox orientation={Gtk.Orientation.VERTICAL}>
-				<box $type="start" orientation={Gtk.Orientation.VERTICAL}>
-					<Clock />
-					<Mpris />
-				</box>
-				<box
-					$type="center"
-					halign={Gtk.Align.CENTER}
-					valign={Gtk.Align.CENTER}
-				>
-					<Workpsaces />
-				</box>
+			<centerbox orientation={Gtk.Orientation.VERTICAL} widthRequest={44} halign={Gtk.Align.CENTER}>
+				<LeftItems/>
 				<box $type="end" orientation={Gtk.Orientation.VERTICAL}>
 					<Tray />
 					<Wireless />

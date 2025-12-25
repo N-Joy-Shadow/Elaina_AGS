@@ -39,9 +39,7 @@ button {
   all: unset;
 }
 window.elaina-bar {
-  centerbox {
-    margin: 8px;
-  }
+
 
   button { 
     background-color: var(--primary-300);
@@ -66,6 +64,13 @@ window.elaina-bar {
       padding-top: 4px;
       padding-bottom: 4px;
 
+      box.pill {
+        background: var(--primary-400);
+      }
+      box.pill, box.pill-top, box.pill-content, box.pill-bottom {
+        background: var(--primary-400);
+      }
+
       button {
         min-width: 32px;
         min-height: 32px;
@@ -79,7 +84,7 @@ window.elaina-bar {
         border-radius: var(--round-radius);
         background-color: var(--primary-200);
         border: 2px solid var(--primary-400);
-        box-shadow: 0 0 0 1px rgba(91, 33, 182, 0.2);
+        //box-shadow: 0 0 0 1px rgba(91, 33, 182, 0.2);
         padding: 3px;
       }
       
@@ -87,16 +92,57 @@ window.elaina-bar {
         -gtk-icon-size: 14px;
       }
       .workspace-icon-container {
-        :nth-last-child {
-          margin-bottom: 10px;
+        :nth-child(-n + 1) {
+          margin-top: 8px;
+        }
+        :nth-last-child(-n + 1) {
+          margin-bottom: 8px;
         }
       }
     }
   }
 
   .right-items {
-    box.sounds-tray { 
+    box.pill,
+    box.pill-top,
+    box.pill-bottom,
+    box.pill-content {
+      background-color: var(--primary-200);
+    }
+    box.pill-content {
+      padding: 0;
+    }
 
+    box.pill {
+      min-width: 36px;
+    }
+
+    menubutton.tray-module {
+      min-width: 36px;
+      min-height: 36px;
+      margin: 4px;
+      border-radius: 999px;
+      background-color: transparent;
+      color: var(--text-primary);
+      transition: all 200ms ease;
+    }
+
+    menubutton.tray-module:hover {
+      background-color: var(--primary-300);
+    }
+
+    menubutton,
+    button,
+    menubutton > button {
+      background-color: transparent;
+      box-shadow: none;
+    }
+
+
+
+    .tray-icon {
+      -gtk-icon-size: 14px;
+      -gtk-icon-palette: var(--primary-500);
     }
   }
 }
